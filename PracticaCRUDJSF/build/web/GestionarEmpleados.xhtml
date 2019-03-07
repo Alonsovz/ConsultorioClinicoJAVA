@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Principal.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                #{departamentoBean.mostrarD()}
+                #{empleadoBean.mostrar()}
+                
+                <h:form id="formulario"> 
+                    <p:panelGrid id="dataForm" columns="3">
+                    <p:outputLabel value="Departamento" />
+                    <p:selectOneMenu >
+                        <f:selectItems value="#{departamentoBean.listarDep}" var="dep" itemValue="#{dep.codigoDepartamento}"
+                                       itemLabel="#{dep.nombre}"/>
+                    </p:selectOneMenu>
+                    </p:panelGrid>
+                    
+                    
+                    <p:dataTable var="emp" id="empleados" value="#{empleadoBean.listarEmp}">
+                        <p:column headerText="Codigo">
+                            <p:outputLabel value="#{emp.codigoEmpleado}"/>
+                        </p:column>
+                         <p:column headerText="Nombre">
+                             <p:outputLabel value="#{emp.nombre}"/>
+                        </p:column>
+                         <p:column headerText="Genero">
+                             <p:outputLabel value="#{emp.genero}"/>
+                        </p:column>
+                        <p:column headerText="Intereses">
+                             <p:outputLabel value="#{emp.intereses}"/>
+                        </p:column>
+                         <p:column headerText="Edad">
+                             <p:outputLabel value="#{emp.edad}"/>
+                        </p:column>
+                         
+                         <p:column headerText="Direccion">
+                             <p:outputLabel value="#{emp.direccion}"/>
+                        </p:column>
+                         <p:column headerText="Cargo">
+                             <p:outputLabel value="#{emp.cargo}"/>
+                        </p:column>
+                         <p:column headerText="Departamento">
+                             <h:inputHidden value="#{emp.departamento.codigoDepartamento}"/>
+                             <p:outputLabel value="#{emp.departamento.nombre}"/>
+                        </p:column>
+                        
+                         
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
